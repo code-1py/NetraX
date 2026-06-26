@@ -1,0 +1,20 @@
+project_details.txt
+.env
+test.py
+Logs/
+
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore compiled Python files
+*.py[cod]
+*$py.class
+project_details
+
+
+settings.json
+
+progress_log.txt
+
+packages
+scan.xml
