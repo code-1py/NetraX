@@ -7,6 +7,7 @@ class ExtraReasons:
     proto:str|None = None
     ports:str|None = None
 
+@dataclass
 class ExtraPorts:
     state:str|None = None
     count:int|None = None
