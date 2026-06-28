@@ -1,5 +1,4 @@
 from xml.etree.ElementTree import Element
-import xml.etree.ElementTree as ET
 from ..models import State , Service
 from ..exceptions import XmlParseError
 from .common_functions import _to_int
