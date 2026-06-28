@@ -1,6 +1,6 @@
 from dataclasses import dataclass , field
 from .address import Address
-from .hostnames import HostNames
+from .hostname import HostName
 from .port import Port
 from .extra import ExtraPorts
 from .times import Times
@@ -9,8 +9,8 @@ from .times import Times
 class Host:
     starttime:str|None = None
     endtime:str|None = None
-    address:list[Address|None] = field(default_factory=list)
+    address:list[Address] = field(default_factory=list)
     extraports:ExtraPorts|None = None
-    hostnames:HostNames|None = None
-    ports:list[Port|None] = field(default_factory=list)
+    hostnames:list[HostName] = field(default_factory=list)
+    ports:list[Port] = field(default_factory=list)
     times:Times|None = None

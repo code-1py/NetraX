@@ -1,7 +1,7 @@
 from .address import Address
 from .extra import ExtraPorts , ExtraReasons
 from .host import Host
-from .hostnames import HostNames
+from .hostname import HostName
 from .port import Port
 from .scan_report import NmapRun , ScanInfo , ScanReport
 from .service import Service
@@ -13,7 +13,7 @@ __all__ = [
     "ExtraPorts",
     "ExtraReasons",
     "Host",
-    "HostNames",
+    "HostName",
     "Port",
     "NmapRun",
     "ScanInfo",

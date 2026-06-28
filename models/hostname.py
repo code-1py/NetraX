@@ -1,6 +1,6 @@
 from dataclasses import dataclass , field
 
 @dataclass
-class HostNames:
+class HostName:
     name:str|None = None
     type:str|None = None
