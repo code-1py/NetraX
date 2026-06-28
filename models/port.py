@@ -1,5 +1,5 @@
 from dataclasses import dataclass , field
-from .status import State
+from .state import State
 from .service import Service
 
 @dataclass
