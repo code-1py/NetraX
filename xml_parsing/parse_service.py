@@ -1,6 +1,7 @@
 from ..exceptions import XmlParseError
 from ..models import Service
 from xml.etree.ElementTree import Element
+from .common_functions import _to_int
 
 def parse_service(service: Element | None) -> Service:
     if service is None:
@@ -14,7 +15,7 @@ def parse_service(service: Element | None) -> Service:
             version=service.get("version"),
             method=service.get("method"),
             tunnel=service.get("tunnel"),
-            conf=service.get("conf"),
+            conf=_to_int(service.get("conf")),
         )
     except Exception as exc:
         raise XmlParseError(service) from exc

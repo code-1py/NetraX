@@ -24,3 +24,4 @@ class ScanReport:
     verbose_level:int|None = None
     debugging_level:int|None = None
     hosts:list[Host|None] = field(default_factory=list)
+    raw_xml:str|None = None

@@ -36,7 +36,7 @@ def parse_scaninfo(scaninfo: Element | None) -> ScanInfo:
         raise XmlParseError(scaninfo) from exc
 
 
-def parse_scan_report(nmaprun: Element | None) -> ScanReport:
+def parse_scan_report(nmaprun: Element | None , raw_xml:str|None = None) -> ScanReport:
     if nmaprun is None:
         raise XmlParseError("<nmaprun> element not found")
 
@@ -65,6 +65,7 @@ def parse_scan_report(nmaprun: Element | None) -> ScanReport:
                 parse_host(host)
                 for host in nmaprun.findall("host")
             ],
+            raw_xml=raw_xml
         )
     except Exception as exc:
         raise XmlParseError(nmaprun) from exc

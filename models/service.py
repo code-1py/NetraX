@@ -8,4 +8,4 @@ class Service:
     version:str|None = None
     method:str|None = None
     tunnel:str|None = None
-    conf:str|None = None
+    conf:int|None = None

@@ -14,6 +14,7 @@ def parse_host(host: Element | None) -> Host:
     try:
         ports = host.find("ports")
         extraports = ports.find("extraports") if ports is not None else None
+        hostnames = host.find("hostnames")
 
         return Host(
             starttime=host.get("starttime"),
@@ -28,8 +29,8 @@ def parse_host(host: Element | None) -> Host:
                 else None
             ),
             hostnames=(
-                parse_hostnames(host.find("hostnames"))
-                if host.find("hostnames") is not None
+                parse_hostnames(hostnames)
+                if hostnames is not None
                 else None
             ),
             ports=[

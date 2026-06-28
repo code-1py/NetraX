@@ -11,19 +11,23 @@ def parse_port(port: Element | None) -> Port:
         raise XmlParseError("<port> element not found")
 
     try:
-        state = port.find("state")
-        service = port.find("service")
-
-        parsed_service = parse_service(service) if service else None
-        parsed_state = parse_state(state) if state else None
-        
+        state_elem = port.find("state")
+        service_elem = port.find("service")
 
         return Port(
             protocol=port.get("protocol"),
             portid=_to_int(port.get("portid")),
-            state=parsed_state,
-            services=parsed_service
-            )
-            
+            state=(
+                parse_state(state_elem)
+                if state_elem is not None
+                else None
+            ),
+            services=(
+                parse_service(service_elem)
+                if service_elem is not None
+                else None
+            ),
+        )
+
     except Exception as exc:
         raise XmlParseError(port) from exc
