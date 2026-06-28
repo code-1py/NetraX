@@ -1,8 +1,7 @@
 from xml.etree.ElementTree import Element
-import xml.etree.ElementTree as ET
-
 from ..models import Times
 from ..exceptions import XmlParseError
+from .common_functions import _to_int
 
 
 def parse_times(times: Element | None) -> Times:
@@ -11,9 +10,9 @@ def parse_times(times: Element | None) -> Times:
 
     try:
         return Times(
-            srtt=times.get("srtt"),
-            rttvar=times.get("rttvar"),
-            to=times.get("to"),
+            srtt=_to_int(times.get("srtt")),
+            rttvar=_to_int(times.get("rttvar")),
+            to=_to_int(times.get("to")),
         )
     except Exception as exc:
         raise XmlParseError(times) from exc

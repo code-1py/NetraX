@@ -5,7 +5,7 @@ from .hostnames import HostNames
 from .port import Port
 from .scan_report import NmapRun , ScanInfo , ScanReport
 from .service import Service
-from .status import Status
+from .status import State
 from .times import Times
 
 __all__ = [
@@ -19,6 +19,6 @@ __all__ = [
     "ScanInfo",
     "ScanReport",
     "Service",
-    "Status",
+    "State",
     "Times",
 ]

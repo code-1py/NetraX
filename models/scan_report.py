@@ -21,6 +21,6 @@ class ScanInfo:
 class ScanReport:
     nmaprun:NmapRun|None = None
     scaninfo:ScanInfo|None = None
-    verbose_level:int|None
+    verbose_level:int|None = None
     debugging_level:int|None = None
     hosts:list[Host|None] = field(default_factory=list)
