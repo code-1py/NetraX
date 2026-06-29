@@ -1,6 +1,6 @@
-from .scanner import Scanner
+from ..netrax.scanner import Scanner
 
-from .models import (
+from ..netrax.models import (
     ScanReport,
     NmapRun,
     ScanInfo,
@@ -15,7 +15,7 @@ from .models import (
     Times,
 )
 
-from .exceptions import *
+from ..netrax.exceptions import *
 
 __version__ = "0.1.0"
 
