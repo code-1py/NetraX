@@ -1,14 +1,21 @@
-# netrax
+# NetraX
 
-**Async Python wrapper for Nmap** — run network scans, parse results, and integrate with your tools using clean async/await syntax.
+**Async Python wrapper for Nmap**
 
-[![PyPI version](https://img.shields.io/pypi/v/netrax.svg)](https://pypi.org/project/netrax/)
-[![Python](https://img.shields.io/pypi/pyversions/netrax.svg)](https://pypi.org/project/netrax/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+Run network scans, parse XML results into typed dataclasses, and integrate Nmap into modern asyncio applications.
+
+| Information | Value |
+|------------|---------|
+| Version | 0.1.5 |
+| Python | 3.11+ |
+| License | [MIT](https://github.com/code-1py/NetraX/blob/master/LICENSE) |
+| PyPI | https://pypi.org/project/netrax/ |
+| Repository | https://github.com/code-1py/NetraX |
+| Issues | https://github.com/code-1py/NetraX/issues |
 
 > **Note:** netrax requires [Nmap](https://nmap.org) to be installed on your system.
 > Nmap is a separate open-source tool distributed under the
-> [Nmap Public Source License](https://svn.nmap.org/nmap/LICENSE). netrax does not
+> [Nmap Public Source License](https://svn.nmap.org/nmap/LICENSE). NetraX does not
 > bundle or redistribute Nmap — it invokes it as an external process.
 
 ---
@@ -265,12 +272,16 @@ timeouts.NMAP_LOCATE_TIMEOUT  = 5     # seconds (default: 3)
 
 ---
 
+## Author
+
+GitHub: https://github.com/code-1py
+
 ## Legal
 
-netrax is released under the [MIT License](LICENSE).
+NetraX is released under the [MIT License](https://github.com/code-1py/NetraX/blob/master/LICENSE).
 
 This project invokes [Nmap](https://nmap.org) as an external subprocess.
-Nmap is not bundled with netrax and is distributed under its own
+Nmap is not bundled with NetraX and is distributed under its own
 [Nmap Public Source License](https://svn.nmap.org/nmap/LICENSE).
 Users are responsible for complying with Nmap's license and all applicable
 laws when performing network scans. Only scan networks and systems you own
