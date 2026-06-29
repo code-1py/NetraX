@@ -18,3 +18,5 @@ progress_log.txt
 
 packages
 scan.xml
+
+dist/

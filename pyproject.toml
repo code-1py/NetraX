@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netrax"
+version = "0.1.0"
+description = "Async Python wrapper for Nmap"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+keywords = ["nmap", "network", "scanner", "async", "asyncio", "security", "port-scanner"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Networking",
+    "Topic :: Security",
+    "Framework :: AsyncIO",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/code-1py/NetraX"
+Repository = "https://github.com/code-1py/NetraX"
+Issues = "https://github.com/code-1py/NetraX/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["netrax"]
