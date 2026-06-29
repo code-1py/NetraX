@@ -1,10 +1,10 @@
 import asyncio
+
 from ..exceptions import (
     NmapNotFoundError,
     ProcessTimeoutError,
 )
 from ..config import timeouts
-
 
 
 async def nmap_locator() -> bool:
@@ -19,19 +19,24 @@ async def nmap_locator() -> bool:
         raise NmapNotFoundError() from exc
 
     try:
-        async with asyncio.timeout(timeouts.NMAP_LOCATE_TIMEOUT): # timeout
+        async with asyncio.timeout(timeouts.NMAP_LOCATE_TIMEOUT):
             stdout, stderr = await proc.communicate()
 
     except TimeoutError as exc:
-        proc.kill() # kill on timeout
-        await proc.wait()
+        if proc.returncode is None:
+            proc.kill()
+            await proc.wait()
 
         raise ProcessTimeoutError(
             "Failed to locate Nmap. "
             "Increase netrax.config.timeouts.NMAP_LOCATE_TIMEOUT if needed."
         ) from exc
-    except ProcessLookupError: # ignore if process already killed
-        pass
+
+    except Exception:
+        if proc.returncode is None:
+            proc.kill()
+            await proc.wait()
+        raise
 
     if proc.returncode != 0:
         raise NmapNotFoundError(stderr.decode())
