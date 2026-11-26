@@ -1,7 +1,8 @@
-from .common_functions import _to_int
+from xml.etree.ElementTree import Element
+
 from ..exceptions import XmlParseError
 from ..models import Address
-from xml.etree.ElementTree import Element
+
 
 def parse_address(address: Element | None) -> Address:
     if address is None:

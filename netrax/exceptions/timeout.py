@@ -1,5 +1,6 @@
 from .base import NetraxError
 
+
 class ScanTimeoutError(NetraxError):
     """
     An Nmap scan exceeded its allowed execution time.
@@ -14,7 +15,7 @@ class ScanTimeoutError(NetraxError):
         self,
         stdout: str | None = None,
         stderr: str | None = None,
-        timeout: int | float | None = None,
+        timeout: float | None = None,
     ):
         self.stdout = stdout
         self.stderr = stderr
@@ -27,6 +28,7 @@ class ScanTimeoutError(NetraxError):
             f"stdout: {stdout or 'No output'}\n"
             f"stderr: {stderr or 'No error output'}"
         )
+
 
 class ProcessTimeoutError(NetraxError):
     def __init__(self, reason: str | None = None):

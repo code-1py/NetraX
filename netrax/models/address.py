@@ -1,7 +1,8 @@
-from dataclasses import dataclass , field
+from dataclasses import dataclass
+
 
 @dataclass
 class Address:
-    addr:str|None = None
-    addrtype:str|None = None
-    vendor:str|None = None
+    addr: str | None = None
+    addrtype: str | None = None
+    vendor: str | None = None

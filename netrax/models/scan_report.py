@@ -1,23 +1,26 @@
-from dataclasses import dataclass , field
-from .host import Host
-from dataclasses import asdict
 import json
+from dataclasses import asdict, dataclass, field
+
+from .host import Host
+
 
 @dataclass
 class NmapRun:
-    scanner:str|None = None
-    args:str|None = None
-    start:str|None = None
-    startstr:str|None = None
-    version:str|None = None
-    xmlversion:str|None = None
+    scanner: str | None = None
+    args: str | None = None
+    start: str | None = None
+    startstr: str | None = None
+    version: str | None = None
+    xmlversion: str | None = None
+
 
 @dataclass
 class ScanInfo:
-    type:str|None = None
-    protocol:str|None = None
-    numservices:int|None = None
-    services:str|None = None
+    type: str | None = None
+    protocol: str | None = None
+    numservices: int | None = None
+    services: str | None = None
+
 
 @dataclass
 class ScanReport:
@@ -61,12 +64,12 @@ class ScanReport:
     def to_json(self, indent: int | None = None) -> str:
         """
         Convert the scan report to a JSON string.
-    
+
         Args:
             indent:
                 Number of spaces used for indentation.
                 Use None for compact JSON output.
-    
+
         Returns:
             str:
                 JSON representation of the scan report.
@@ -75,9 +78,10 @@ class ScanReport:
             self.to_dict(),
             indent=indent,
         )
-    nmaprun:NmapRun|None = None
-    scaninfo:ScanInfo|None = None
-    verbose_level:int|None = None
-    debugging_level:int|None = None
-    hosts:list[Host|None] = field(default_factory=list)
-    raw_xml:str|None = None
+
+    nmaprun: NmapRun | None = None
+    scaninfo: ScanInfo | None = None
+    verbose_level: int | None = None
+    debugging_level: int | None = None
+    hosts: list[Host | None] = field(default_factory=list)
+    raw_xml: str | None = None

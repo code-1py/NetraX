@@ -1,10 +1,10 @@
 import asyncio
 
+from ..config import timeouts
 from ..exceptions import (
     NmapNotFoundError,
     ProcessTimeoutError,
 )
-from ..config import timeouts
 
 
 async def nmap_locator() -> bool:
@@ -20,7 +20,7 @@ async def nmap_locator() -> bool:
 
     try:
         async with asyncio.timeout(timeouts.NMAP_LOCATE_TIMEOUT):
-            stdout, stderr = await proc.communicate()
+            _stdout, stderr = await proc.communicate()
 
     except TimeoutError as exc:
         if proc.returncode is None:

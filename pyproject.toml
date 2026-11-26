@@ -7,7 +7,10 @@ name = "netrax"
 version = "0.1.5"
 description = "Async Python wrapper for Nmap"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
+
+authors = [{ name = "Bhavya Malhotra" }]
 requires-python = ">=3.11"
 keywords = ["nmap", "network", "scanner", "async", "asyncio", "security", "port-scanner"]
 classifiers = [

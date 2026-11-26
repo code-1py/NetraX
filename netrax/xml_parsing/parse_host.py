@@ -1,11 +1,13 @@
-from ..exceptions import XmlParseError
 from xml.etree.ElementTree import Element
+
+from ..exceptions import XmlParseError
 from ..models import Host
 from .parse_address import parse_address
 from .parse_extra import parse_extra_ports
 from .parse_hostnames import parse_hostnames
-from .parse_time import parse_times
 from .parse_port import parse_port
+from .parse_time import parse_times
+
 
 def parse_host(host: Element | None) -> Host:
     if host is None:
@@ -19,24 +21,14 @@ def parse_host(host: Element | None) -> Host:
         return Host(
             starttime=host.get("starttime"),
             endtime=host.get("endtime"),
-            address=[
-                parse_address(address)
-                for address in host.findall("address")
-            ],
+            address=[parse_address(address) for address in host.findall("address")],
             extraports=(
-                parse_extra_ports(extraports)
-                if extraports is not None
-                else None
+                parse_extra_ports(extraports) if extraports is not None else None
             ),
-            hostnames=(
-                parse_hostnames(hostnames)
-                if hostnames is not None
-                else None
-            ),
-            ports=[
-                parse_port(port)
-                for port in ports.findall("port")
-            ] if ports is not None else [],
+            hostnames=(parse_hostnames(hostnames) if hostnames is not None else None),
+            ports=[parse_port(port) for port in ports.findall("port")]
+            if ports is not None
+            else [],
             times=(
                 parse_times(host.find("times"))
                 if host.find("times") is not None

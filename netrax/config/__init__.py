@@ -1,3 +1,3 @@
-from ..config  import timeouts
+from ..config import timeouts
 
 __all__ = ["timeouts"]

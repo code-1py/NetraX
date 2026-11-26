@@ -1,8 +1,8 @@
-from dataclasses import dataclass , field
-from .service import Service
+from dataclasses import dataclass
+
 
 @dataclass
 class State:
-    state:str|None = None
-    reason:str|None = None
-    reason_ttl:int|None = None
+    state: str | None = None
+    reason: str | None = None
+    reason_ttl: int | None = None

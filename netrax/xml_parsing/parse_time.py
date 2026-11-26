@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import Element
-from ..models import Times
+
 from ..exceptions import XmlParseError
+from ..models import Times
 from .common_functions import _to_int
 
 

@@ -1,7 +1,9 @@
+from xml.etree.ElementTree import Element
+
 from ..exceptions import XmlParseError
 from ..models import Service
-from xml.etree.ElementTree import Element
 from .common_functions import _to_int
+
 
 def parse_service(service: Element | None) -> Service:
     if service is None:

@@ -1,14 +1,16 @@
-from dataclasses import dataclass , field
+from dataclasses import dataclass
+
 
 @dataclass
 class ExtraReasons:
-    reason:str|None = None
-    count:int|None = None
-    proto:str|None = None
-    ports:str|None = None
+    reason: str | None = None
+    count: int | None = None
+    proto: str | None = None
+    ports: str | None = None
+
 
 @dataclass
 class ExtraPorts:
-    state:str|None = None
-    count:int|None = None
-    extrareasons:ExtraReasons|None = None
+    state: str | None = None
+    count: int | None = None
+    extrareasons: ExtraReasons | None = None

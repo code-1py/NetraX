@@ -1,8 +1,10 @@
-from .common_functions import _to_int
-from ..exceptions import XmlParseError
 from xml.etree.ElementTree import Element
-from ..models import NmapRun , ScanInfo , ScanReport
+
+from ..exceptions import XmlParseError
+from ..models import NmapRun, ScanInfo, ScanReport
+from .common_functions import _to_int
 from .parse_host import parse_host
+
 
 def parse_nmaprun(nmaprun: Element | None) -> NmapRun:
     if nmaprun is None:
@@ -36,7 +38,9 @@ def parse_scaninfo(scaninfo: Element | None) -> ScanInfo:
         raise XmlParseError(scaninfo) from exc
 
 
-def parse_scan_report(nmaprun: Element | None , raw_xml:str|None = None) -> ScanReport:
+def parse_scan_report(
+    nmaprun: Element | None, raw_xml: str | None = None
+) -> ScanReport:
     if nmaprun is None:
         raise XmlParseError("<nmaprun> element not found")
 
@@ -52,20 +56,13 @@ def parse_scan_report(nmaprun: Element | None , raw_xml:str|None = None) -> Scan
                 else None
             ),
             verbose_level=(
-                _to_int(verbose.get("level"))
-                if verbose is not None
-                else None
+                _to_int(verbose.get("level")) if verbose is not None else None
             ),
             debugging_level=(
-                _to_int(debugging.get("level"))
-                if debugging is not None
-                else None
+                _to_int(debugging.get("level")) if debugging is not None else None
             ),
-            hosts=[
-                parse_host(host)
-                for host in nmaprun.findall("host")
-            ],
-            raw_xml=raw_xml
+            hosts=[parse_host(host) for host in nmaprun.findall("host")],
+            raw_xml=raw_xml,
         )
     except Exception as exc:
         raise XmlParseError(nmaprun) from exc

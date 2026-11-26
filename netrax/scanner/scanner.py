@@ -1,16 +1,19 @@
 from __future__ import annotations
+
 import asyncio
 import warnings
 from xml.etree import ElementTree
+
 from ..config import timeouts
 from ..exceptions import (
     NmapExecutionError,
     ScanTimeoutError,
 )
+from ..models import ScanReport
 from ..permissions import require_admin
 from ..xml_parsing import parse_scan_report
 from .nmap_locator import nmap_locator
-from ..models import ScanReport
+
 
 class Scanner:
     """
@@ -99,7 +102,7 @@ class Scanner:
                 proc.kill()
             except ProcessLookupError:
                 pass
-            
+
             stdout, stderr = await proc.communicate()
 
             raise ScanTimeoutError(
@@ -113,7 +116,7 @@ class Scanner:
                 proc.kill()
             except ProcessLookupError:
                 pass
-            
+
             await proc.wait()
             raise
 
@@ -176,7 +179,7 @@ class Scanner:
 
             XmlParseError:
                 Failed to parse Nmap XML output.
-            
+
             ProcessTimeoutError:
                 Internal Nmap verification timed out.
         """
@@ -203,46 +206,45 @@ class Scanner:
     ) -> ScanReport:
         """
         Perform Nmap service and version detection (-sV).
-        
+
         This scan attempts to identify services running on open ports and,
         when possible, determine the software product and version.
-        
+
         Args:
             target:
                 Target IP address, hostname, or network range.
-        
+
             timeout:
                 Maximum scan runtime in seconds before the scan is terminated.
-        
+
                 To change the global default timeout:
-        
+
                     from netrax.config import timeouts
-        
+
                     timeouts.DEFAULT_SCAN_TIMEOUT = 300
-        
+
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
-        
+
         Raises:
             AdminRequiredError:
                 Administrator/root privileges are required.
-        
+
             NmapExecutionError:
                 Nmap returned a non-zero exit code.
-        
+
             ScanTimeoutError:
                 The scan exceeded the configured timeout.
-        
+
             XmlParseError:
                 Failed to parse Nmap XML output.
-        
+
             ProcessTimeoutError:
                 Internal Nmap verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
-
 
         return await self.scan(
             target,
@@ -320,17 +322,17 @@ class Scanner:
     ) -> ScanReport:
         """
         Perform operating system detection (-O).
-        
+
         Nmap analyzes network responses and attempts to determine the
         target operating system.
-        
+
         Args:
             target:
                 Target IP address, hostname, or network range.
-        
+
             timeout:
                 Maximum scan runtime in seconds.
-        
+
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
@@ -384,17 +386,17 @@ class Scanner:
         timeout: int | None = None,
     ) -> ScanReport:
         """
-        Perform host discovery (-sn).       
+        Perform host discovery (-sn).
 
         This scan determines whether hosts are online without performing
-        a port scan.        
+        a port scan.
 
         Args:
             target:
-                Target IP address, hostname, or network range.      
+                Target IP address, hostname, or network range.
 
             timeout:
-                Maximum scan runtime in seconds.        
+                Maximum scan runtime in seconds.
 
         Returns:
             ScanReport:

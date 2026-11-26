@@ -1,39 +1,35 @@
-from ..netrax.scanner import Scanner
-
-from ..netrax.models import (
-    ScanReport,
-    NmapRun,
-    ScanInfo,
-    Host,
+from .exceptions import *
+from .models import (
     Address,
-    HostName,
-    Port,
-    State,
-    Service,
     ExtraPorts,
     ExtraReasons,
+    Host,
+    HostName,
+    NmapRun,
+    Port,
+    ScanInfo,
+    ScanReport,
+    Service,
+    State,
     Times,
 )
-
-from ..netrax.exceptions import *
+from .scanner import Scanner
 
 __version__ = "0.1.0"
 
 __all__ = [
-    "Scanner",
-
-    "ScanReport",
-    "NmapRun",
-    "ScanInfo",
-    "Host",
     "Address",
-    "HostName",
-    "Port",
-    "State",
-    "Service",
     "ExtraPorts",
     "ExtraReasons",
+    "Host",
+    "HostName",
+    "NmapRun",
+    "Port",
+    "ScanInfo",
+    "ScanReport",
+    "Scanner",
+    "Service",
+    "State",
     "Times",
-
     "__version__",
 ]

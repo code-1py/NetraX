@@ -1,0 +1,9 @@
+include CHANGELOG.md
+include LICENSE
+include README.md
+include pyproject.toml
+include .github/release-files.json
+include .github/scripts/check_release_contents.py
+include .github/workflows/ci.yml
+recursive-include requirements *.txt
+recursive-include netrax *.py
