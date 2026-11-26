@@ -4,7 +4,7 @@
 
 ## Current release
 
-- Version: **0.1.5**
+- Version: **0.1.6**
 - Python: **3.11 or newer**
 - Runtime dependencies: **none** (standard library only)
 - License: [MIT](LICENSE)
