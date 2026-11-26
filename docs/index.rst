@@ -21,4 +21,10 @@ output, and returns typed Python dataclasses.
 
    api/index
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Project
+
+   license
+
 The documentation version is read from the project metadata in ``pyproject.toml``.

@@ -10,6 +10,7 @@ with (ROOT / "pyproject.toml").open("rb") as project_file:
 
 project = project_metadata["name"]
 author = ", ".join(item["name"] for item in project_metadata.get("authors", []))
+copyright = f"2026, {author}"
 release = project_metadata["version"]
 version = release
 
@@ -28,3 +29,4 @@ root_doc = "index"
 html_theme = "furo"
 html_title = f"{project} {version} documentation"
 html_static_path = []
+html_show_sourcelink = False

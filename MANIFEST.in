@@ -1,11 +1,20 @@
-include CHANGELOG.md
-include LICENSE
 include README.md
-include pyproject.toml
-include .github/release-files.json
-include .github/scripts/check_release_contents.py
-include .github/workflows/ci.yml
-include .readthedocs.yaml
-recursive-include docs *.py *.rst *.txt
-recursive-include requirements *.txt
+include LICENSE
 recursive-include netrax *.py
+
+exclude .env
+exclude .env.*
+
+prune venv
+prune .venv
+prune dev_logs
+prune Logs
+prune build
+prune dist
+prune docs
+prune .github
+prune requirements
+prune packages
+
+global-exclude __pycache__
+global-exclude *.py[cod]

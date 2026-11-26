@@ -20,4 +20,6 @@ packages
 scan.xml
 
 dist/
+build/
+*.egg-info/
 docs/_build/

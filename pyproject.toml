@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "netrax"
@@ -18,7 +18,6 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: System :: Networking",
     "Topic :: Security",
@@ -34,5 +33,20 @@ Issues = "https://github.com/code-1py/NetraX/issues"
 Documentation = "https://netrax.readthedocs.io/en/latest/"
 Changelog = "https://github.com/code-1py/NetraX/blob/main/CHANGELOG.md"
 
-[tool.hatch.build.targets.wheel]
-packages = ["netrax"]
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["netrax*"]
+namespaces = false
+exclude = ["venv*", ".venv*", "env*", "build*", "dist*", "*.egg-info*"]
+
+[tool.check-manifest]
+ignore = [
+    "CHANGELOG.md",
+    "docs/**",
+    "requirements/**",
+    ".readthedocs.yaml",
+    ".github/**",
+]
