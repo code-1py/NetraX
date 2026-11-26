@@ -31,7 +31,13 @@ class ScanTimeoutError(NetraxError):
 
 
 class ProcessTimeoutError(NetraxError):
+    """An auxiliary NetraX subprocess exceeded its timeout.
+
+    This is used when checking that Nmap is available before a scan.
+    """
+
     def __init__(self, reason: str | None = None):
+        """Create the error, optionally including a short reason."""
         message = "Process timed out"
 
         if reason:

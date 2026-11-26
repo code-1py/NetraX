@@ -2,7 +2,13 @@ from .base import NetraxError
 
 
 class NmapExecutionError(NetraxError):
-    """Nmap returned a non-zero exit code."""
+    """Nmap exited with a non-zero status.
+
+    Attributes:
+        stderr: Text written to Nmap's standard error stream.
+        stdout: Text written to Nmap's standard output stream.
+        returncode: Nmap process exit status.
+    """
 
     def __init__(self, stderr: str, stdout: str, returncode: int):
         self.stderr = stderr

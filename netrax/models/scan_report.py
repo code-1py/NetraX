@@ -6,6 +6,17 @@ from .host import Host
 
 @dataclass
 class NmapRun:
+    """Top-level Nmap scan metadata.
+
+    Attributes:
+        scanner: Scanner program name.
+        args: Command line recorded in the XML.
+        start: Scan start time value recorded by Nmap.
+        startstr: Human-readable scan start time.
+        version: Nmap version string.
+        xmlversion: Nmap XML format version.
+    """
+
     scanner: str | None = None
     args: str | None = None
     start: str | None = None
@@ -16,6 +27,15 @@ class NmapRun:
 
 @dataclass
 class ScanInfo:
+    """Summary of the scan type and services covered.
+
+    Attributes:
+        type: Scan type reported by Nmap.
+        protocol: Protocol scanned, when specified.
+        numservices: Number of services or ports included in the scan.
+        services: Service or port selection recorded by Nmap.
+    """
+
     type: str | None = None
     protocol: str | None = None
     numservices: int | None = None
@@ -27,6 +47,14 @@ class ScanReport:
     """
     Parsed Nmap scan report.
 
+    Attributes:
+        nmaprun: Top-level scanner metadata.
+        scaninfo: Summary of the scan type and service selection.
+        verbose_level: Nmap verbosity level, if included.
+        debugging_level: Nmap debugging level, if included.
+        hosts: Parsed host results.
+        raw_xml: Original XML text captured from Nmap.
+
     Notes
     -----
     ScanReport instances can be converted to standard Python
@@ -34,16 +62,18 @@ class ScanReport:
 
     Examples
     --------
-    report = await scanner.service_scan("127.0.0.1")
+    .. code-block:: python
 
-    # NetraX helper methods
-    data = report.to_dict()
-    json_data = report.to_json(indent=4)
+       report = await scanner.service_scan("127.0.0.1")
 
-    # Standard dataclasses API
-    from dataclasses import asdict
+       # NetraX helper methods
+       data = report.to_dict()
+       json_data = report.to_json(indent=4)
 
-    data = asdict(report)
+       # Standard dataclasses API
+       from dataclasses import asdict
+
+       data = asdict(report)
     """
 
     def to_dict(self) -> dict:
@@ -52,8 +82,11 @@ class ScanReport:
 
         This method is equivalent to:
 
-            from dataclasses import asdict
-            asdict(report)
+        .. code-block:: python
+
+           from dataclasses import asdict
+
+           asdict(report)
 
         Returns:
             dict:

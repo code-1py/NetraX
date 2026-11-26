@@ -41,6 +41,19 @@ def parse_scaninfo(scaninfo: Element | None) -> ScanInfo:
 def parse_scan_report(
     nmaprun: Element | None, raw_xml: str | None = None
 ) -> ScanReport:
+    """Parse an Nmap ``<nmaprun>`` element into a :class:`ScanReport`.
+
+    Args:
+        nmaprun: Root ``<nmaprun>`` element from an Nmap XML document.
+        raw_xml: Optional original XML string to retain on the report.
+
+    Returns:
+        A report containing parsed metadata and host results.
+
+    Raises:
+        XmlParseError: The root element is missing or the document cannot be
+            converted into NetraX result models.
+    """
     if nmaprun is None:
         raise XmlParseError("<nmaprun> element not found")
 

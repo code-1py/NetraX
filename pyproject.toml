@@ -28,9 +28,11 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/code-1py/NetraX"
+Homepage = "https://github.com/code-1py/NetraX#readme"
 Repository = "https://github.com/code-1py/NetraX"
 Issues = "https://github.com/code-1py/NetraX/issues"
+Documentation = "https://netrax.readthedocs.io/en/latest/"
+Changelog = "https://github.com/code-1py/NetraX/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["netrax"]

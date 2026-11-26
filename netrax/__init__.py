@@ -15,7 +15,7 @@ from .models import (
 )
 from .scanner import Scanner
 
-__version__ = "0.1.0"
+__version__ = "0.1.5"
 
 __all__ = [
     "Address",

@@ -2,7 +2,13 @@ from .base import NetraxError
 
 
 class AIProviderError(NetraxError):
-    """AI provider request failed."""
+    """An AI provider request failed.
+
+    Attributes:
+        provider: Name of the provider associated with the failed request.
+        status_code: HTTP status code returned by the provider.
+        response_text: Response body returned by the provider.
+    """
 
     def __init__(self, provider: str, status_code: int, response_text: str):
         self.provider = provider
@@ -14,7 +20,12 @@ class AIProviderError(NetraxError):
 
 
 class ReportGenerationError(NetraxError):
-    """Failed to generate AI report."""
+    """An AI report could not be generated.
+
+    Attributes:
+        provider: Name of the provider used for the request.
+        stderr: Error text associated with report generation.
+    """
 
     def __init__(self, provider: str, stderr: str):
         self.provider = provider

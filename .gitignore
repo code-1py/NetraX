@@ -20,3 +20,4 @@ packages
 scan.xml
 
 dist/
+docs/_build/

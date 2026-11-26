@@ -1,2 +1,2 @@
 class NetraxError(Exception):
-    """Base exception for all NetraX errors"""
+    """Base class for exceptions raised by NetraX."""

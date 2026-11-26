@@ -5,5 +5,7 @@ include pyproject.toml
 include .github/release-files.json
 include .github/scripts/check_release_contents.py
 include .github/workflows/ci.yml
+include .readthedocs.yaml
+recursive-include docs *.py *.rst *.txt
 recursive-include requirements *.txt
 recursive-include netrax *.py

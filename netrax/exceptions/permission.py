@@ -2,4 +2,4 @@ from .base import NetraxError
 
 
 class AdminRequiredError(PermissionError, NetraxError):
-    """Raised when administrator/root privileges are required."""
+    """The current process lacks administrator or root privileges."""

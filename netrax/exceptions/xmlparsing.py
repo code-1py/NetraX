@@ -5,7 +5,7 @@ from .base import NetraxError
 
 
 class XmlParseError(NetraxError):
-    """Failed to parse Nmap XML output."""
+    """Nmap XML output could not be parsed into NetraX result models."""
 
     def __init__(self, xml_output: str | Element | None):
         if isinstance(xml_output, Element):

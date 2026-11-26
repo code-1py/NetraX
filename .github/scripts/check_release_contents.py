@@ -89,7 +89,6 @@ def check_sdist(sdist_path: Path, allowed: set[str], root_name: str) -> bool:
         return False
 
     files: set[str] = set()
-    directories: set[str] = set()
     member_names: list[str] = []
     for member in members:
         member_names.append(member.name)
@@ -104,9 +103,7 @@ def check_sdist(sdist_path: Path, allowed: set[str], root_name: str) -> bool:
             return False
         if member.isfile():
             files.add(path.relative_to(root_name).as_posix())
-        elif member.isdir():
-            directories.add(path.as_posix())
-        else:
+        elif not member.isdir():
             print(
                 f"Unsupported source distribution member: {member.name}",
                 file=sys.stderr,

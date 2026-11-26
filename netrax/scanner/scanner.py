@@ -8,6 +8,7 @@ from ..config import timeouts
 from ..exceptions import (
     NmapExecutionError,
     ScanTimeoutError,
+    XmlParseError,
 )
 from ..models import ScanReport
 from ..permissions import require_admin
@@ -19,20 +20,40 @@ class Scanner:
     """
     Async Nmap scanner.
 
+    Creating an instance checks the current process for administrator or root
+    privileges. Nmap itself is verified the first time a scan is run.
+
+    Scans are asynchronous and run Nmap as a subprocess. Each scan returns a
+    :class:`netrax.models.ScanReport`.
+
+    Raises:
+        AdminRequiredError: The current process lacks required privileges.
+
     Examples
     --------
-    scanner = Scanner()
+    .. code-block:: python
 
-    report = await scanner.service_scan("192.168.1.1")
+       scanner = Scanner()
 
-    report = await scanner.scan(
-        "192.168.1.1",
-        "-sV",
-        "-T4"
-    )
+       report = await scanner.service_scan("192.168.1.1")
+
+       report = await scanner.scan(
+           "192.168.1.1",
+           "-sV",
+           "-T4",
+       )
+
+    To build options dynamically, unpack a sequence into the positional
+    arguments:
+
+    .. code-block:: python
+
+       options = ["-sV", "--top-ports", "100"]
+       report = await scanner.scan("192.168.1.1", *options, timeout=300)
     """
 
     def __init__(self):
+        """Create a scanner after checking for administrator/root privileges."""
         require_admin()
         self._nmap_verified = False
 
@@ -129,7 +150,10 @@ class Scanner:
 
         raw_xml = stdout.decode(errors="ignore")
 
-        root = ElementTree.fromstring(raw_xml)
+        try:
+            root = ElementTree.fromstring(raw_xml)
+        except ElementTree.ParseError as exc:
+            raise XmlParseError(raw_xml) from exc
 
         return parse_scan_report(
             nmaprun=root,
@@ -150,12 +174,15 @@ class Scanner:
                 Target host, IP address, CIDR range, or hostname.
 
             arguments:
-                Additional Nmap arguments.
-                Example:
-                    ["-sV", "-O", "-Pn"]
+                Nmap arguments passed as separate strings. For example,
+                call ``scanner.scan(target, "-sV", "-O", "-Pn")``. If the
+                options are already in a sequence, unpack it with ``*options``.
+                NetraX adds ``-oX -`` to capture and parse XML output, then
+                appends the target to the command.
 
             timeout:
                 Maximum scan runtime in seconds before the process is terminated.
+                If omitted, ``netrax.config.timeouts.DEFAULT_SCAN_TIMEOUT`` is used.
 
                 To change the package-wide default timeout:
 
@@ -182,6 +209,9 @@ class Scanner:
 
             ProcessTimeoutError:
                 Internal Nmap verification timed out.
+
+            NmapNotFoundError:
+                Nmap is not installed or cannot be found on ``PATH``.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -228,20 +258,12 @@ class Scanner:
                 Parsed Nmap scan report.
 
         Raises:
-            AdminRequiredError:
-                Administrator/root privileges are required.
-
-            NmapExecutionError:
-                Nmap returned a non-zero exit code.
-
-            ScanTimeoutError:
-                The scan exceeded the configured timeout.
-
-            XmlParseError:
-                Failed to parse Nmap XML output.
-
-            ProcessTimeoutError:
-                Internal Nmap verification timed out.
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -273,6 +295,14 @@ class Scanner:
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
+
+        Raises:
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -305,6 +335,14 @@ class Scanner:
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
+
+        Raises:
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -336,6 +374,14 @@ class Scanner:
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
+
+        Raises:
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -370,6 +416,14 @@ class Scanner:
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
+
+        Raises:
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
@@ -401,6 +455,14 @@ class Scanner:
         Returns:
             ScanReport:
                 Parsed Nmap scan report.
+
+        Raises:
+            AdminRequiredError: Administrator/root privileges are required.
+            NmapNotFoundError: Nmap is not installed or cannot be found on PATH.
+            NmapExecutionError: Nmap returned a non-zero exit code.
+            ScanTimeoutError: The scan exceeded the configured timeout.
+            XmlParseError: Nmap output could not be parsed as XML.
+            ProcessTimeoutError: Nmap availability verification timed out.
         """
         if timeout is None:
             timeout = timeouts.DEFAULT_SCAN_TIMEOUT
